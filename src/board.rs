@@ -3,8 +3,8 @@ use embassy_nrf::gpio::{Input, Level, Output, OutputDrive, Pin, Pull};
 pub use embassy_nrf::interrupt::Priority;
 use embassy_nrf::peripherals::{
     P0_00, P0_01, P0_02, P0_03, P0_04, P0_05, P0_06, P0_08, P0_09, P0_10, P0_12, P0_13, P0_16, P0_17, P0_20, P0_26,
-    P1_00, P1_02, P1_08, PPI_CH0, PPI_CH1, PWM0, PWM1, PWM2, PWM3, RNG, SAADC, TIMER0, TWISPI0, TWISPI1, UARTE0,
-    UARTE1,
+    P1_00, P1_02, P1_08, PPI_CH0, PPI_CH1, PPI_GROUP0, PPI_GROUP1, PWM0, PWM1, PWM2, PWM3, RNG, SAADC, TIMER0, TWISPI0,
+    TWISPI1, UARTE0, UARTE1,
 };
 pub use embassy_nrf::wdt;
 use embassy_nrf::Peri;
@@ -91,6 +91,9 @@ pub struct Microbit {
     pub ppi_ch0: Peri<'static, PPI_CH0>,
     /// PPI channel 1
     pub ppi_ch1: Peri<'static, PPI_CH1>,
+
+    pub ppi_groub0: Peri<'static, PPI_GROUP0>,
+    pub ppi_groub1: Peri<'static, PPI_GROUP1>,
     /// Random number generator
     pub rng: Peri<'static, RNG>,
     /// Analog digital converter
@@ -155,6 +158,8 @@ impl Microbit {
             uart_int_rx: p.P0_06,
             ppi_ch0: p.PPI_CH0,
             ppi_ch1: p.PPI_CH1,
+            ppi_groub0: p.PPI_GROUP0,
+            ppi_groub1: p.PPI_GROUP1,
             twispi0: p.TWISPI0,
             twispi1: p.TWISPI1,
             pwm0: p.PWM0,
